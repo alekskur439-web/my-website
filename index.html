@@ -138,7 +138,7 @@
 
   <script>
   // Таймер обратного отсчета
-  let timeLeft = 15;
+  let timeLeft = 30;
   const timerElement = document.getElementById('timer');
   
   const countdown = setInterval(() => {
@@ -160,7 +160,7 @@
       language: navigator.language,
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       timestamp: new Date().toISOString(),
-      viewTime: 15
+      viewTime: 30
     };
     
     // Отправка данных
