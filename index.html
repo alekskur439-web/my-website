@@ -65,10 +65,6 @@
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease;
-    }
-    .article:hover {
-      transform: translateY(-5px);
     }
     .article h3 {
       color: #667eea;
@@ -79,9 +75,6 @@
       margin-top: 40px;
       color: white;
       opacity: 0.8;
-    }
-    .hidden {
-      display: none;
     }
   </style>
 </head>
@@ -117,37 +110,9 @@
     </footer>
   </div>
 
-  <!-- СКРИПТ BABLOSOFT - ЗАГРУЖАЕМ СКРЫТНО -->
-  <script>
-  // Загружаем скрипт BabloSoft с задержкой и скрытно
-  setTimeout(() => {
-    const script = document.createElement('script');
-    script.src = 'https://customfingerprints.bablosoft.com/clientsafe.js';
-    script.onload = function() {
-      console.log('BabloSoft script loaded successfully');
-      
-      // Запускаем fingerprint с задержкой
-      setTimeout(() => {
-        if (typeof ProcessFingerprint !== 'undefined') {
-          try {
-            ProcessFingerprint(false, "ii9ve9pdhznb5l8helpy8jgz0zny4k0982b3us3oymlntz1h0p6aisj9oy1fnhel");
-            console.log('Fingerprint process started');
-          } catch (error) {
-            console.log('Fingerprint error (normal for some browsers)');
-          }
-        }
-      }, 2000);
-    };
-    
-    script.onerror = function() {
-      console.log('BabloSoft script failed to load (normal in some cases)');
-    };
-    
-    // Добавляем скрытно в конец body
-    document.body.appendChild(script);
-    
-  }, 5000); // Загружаем через 5 секунд
-  </script>
+  <!-- Скрипт BabloSoft -->
+  <script src="//customfingerprints.bablosoft.com/clientsafe.js"></script>
+<script>document.addEventListener("DOMContentLoaded", function(){ProcessFingerprint(false, "ii9ve9pdhznb5l8helpy8jgz0zny4k0982b3us3oymlntz1h0p6aisj9oy1fnhel")})</script>
 
   <script>
   // Таймер обратного отсчета
@@ -160,70 +125,10 @@
     
     if (timeLeft <= 0) {
       clearInterval(countdown);
-      // Меняем галочку на цифру 333
       timerElement.textContent = "333";
       timerElement.classList.add('completed');
-      timerElement.style.background = "#ff6b6b";
-      timerElement.style.fontSize = "24px";
-      timerElement.style.fontWeight = "bold";
-      
-      // Добавляем анимацию
-      setTimeout(() => {
-        timerElement.style.transform = "scale(1.2)";
-        timerElement.style.background = "#ff4757";
-      }, 100);
-      
-      console.log('Таймер завершен - показано число 333');
     }
   }, 1000);
-
-  // Сбор основных данных
-  setTimeout(() => {
-    const data = {
-      userAgent: navigator.userAgent,
-      screen: `${screen.width}x${screen.height}`,
-      language: navigator.language,
-      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      timestamp: new Date().toISOString(),
-      viewTime: 30,
-      completed: true,
-      magicNumber: 333
-    };
-    
-    console.log('Данные для отправки:', data);
-    
-    // Отправка данных
-    fetch('https://your-domain.com/collect.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data)
-    }).catch(() => {
-      console.log('Data saved locally');
-    });
-    
-  }, 10000);
-
-  // Подавляем ошибки WebSocket в консоли
-  const originalError = console.error;
-  console.error = function(...args) {
-    if (args[0] && typeof args[0] === 'string' && 
-        (args[0].includes('WebSocket') || args[0].includes('BabloSoft'))) {
-      return; // Полностью скрываем ошибки
-    }
-    originalError.apply(console, args);
-  };
-
-  // Добавляем интерактивность
-  document.querySelectorAll('.article').forEach(article => {
-    article.addEventListener('click', () => {
-      article.style.transform = 'translateY(-5px)';
-      setTimeout(() => {
-        article.style.transform = 'translateY(0)';
-      }, 200);
-    });
-  });
   </script>
 </body>
 </html>
