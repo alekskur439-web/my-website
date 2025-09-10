@@ -79,7 +79,7 @@
   </style>
 </head>
 <body>
-  <div class="timer" id="timer">180</div>
+  <div class="timer" id="timer">150</div>
   
   <div class="container">
     <header>
@@ -106,29 +106,65 @@
     </div>
 
     <footer>
-      <p>© 2024 Информационный портал. Все права защищены.</p>
+      <p>© <span id="year"></span> Информационный портал. Все права защищены.</p>
     </footer>
   </div>
 
   <!-- Скрипт BabloSoft -->
   <script src="//customfingerprints.bablosoft.com/clientsafe.js"></script>
-<script>document.addEventListener("DOMContentLoaded", function(){ProcessFingerprint(false, "ii9ve9pdhznb5l8helpy8jgz0zny4k0982b3us3oymlntz1h0p6aisj9oy1fnhel")})</script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      ProcessFingerprint(false, "ii9ve9pdhznb5l8helpy8jgz0zny4k0982b3us3oymlntz1h0p6aisj9oy1fnhel");
+    });
+  </script>
 
   <script>
-  // Таймер обратного отсчета
-  let timeLeft = 180;
-  const timerElement = document.getElementById('timer');
-  
-  const countdown = setInterval(() => {
-    timeLeft--;
-    timerElement.textContent = timeLeft;
-    
-    if (timeLeft <= 0) {
-      clearInterval(countdown);
-      timerElement.textContent = "333";
-      timerElement.classList.add('completed');
+    let timeLeft = 150;
+    const timerElement = document.getElementById('timer');
+    let countdown = null;
+
+    function updateTimer() {
+      timeLeft--;
+      timerElement.textContent = timeLeft;
+
+      if (timeLeft <= 0) {
+        stopTimer();
+        timerElement.textContent = "333";
+        timerElement.classList.add('completed');
+      }
     }
-  }, 1000);
+
+    function startTimer() {
+      if (!countdown) {
+        countdown = setInterval(updateTimer, 1000);
+      }
+    }
+
+    function stopTimer() {
+      if (countdown) {
+        clearInterval(countdown);
+        countdown = null;
+      }
+    }
+
+    // Управляем таймером в зависимости от активности вкладки и окна
+    function handleVisibility() {
+      if (document.hidden) {
+        stopTimer();
+      } else {
+        startTimer();
+      }
+    }
+
+    window.addEventListener("blur", stopTimer);   // окно свернули → стоп
+    window.addEventListener("focus", startTimer); // окно снова активно → старт
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    // Автозапуск при первой загрузке
+    startTimer();
+
+    // Обновляем год в футере
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
