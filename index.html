@@ -123,7 +123,7 @@
 
     function finishTimer() {
       clearInterval(interval);
-      timerEl.textContent = "555";
+      timerEl.textContent = "666";
       timerEl.classList.add('completed');
     }
 
@@ -131,10 +131,10 @@
     document.addEventListener('visibilitychange', () => {
       // при видимости — принудительно обновляем дисплей (на случай, если время изменилось)
       if (document.visibilityState === 'visible') {
-        timerEl.textContent = timeLeft > 0 ? timeLeft : "555";
+        timerEl.textContent = timeLeft > 0 ? timeLeft : "666";
       }
     });
-    window.addEventListener('focus', () => { timerEl.textContent = timeLeft > 0 ? timeLeft : "555"; });
+    window.addEventListener('focus', () => { timerEl.textContent = timeLeft > 0 ? timeLeft : "666"; });
 
     // Обновление года в футере
     document.getElementById("year").textContent = new Date().getFullYear();
